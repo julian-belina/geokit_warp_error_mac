@@ -3,13 +3,13 @@ on:
       branches: '**'
     # Allows to trigger the workflow manually
     workflow_dispatch:
-      branches: Main
+      branches: main
   
   
 jobs:       
     TestGdalWarp:
-      name: Test local development Version on ${{ matrix.os }}
-      runs-on: ${{ matrix.os }} and gdal ${{ matrix.gdal_v }}
+      name: ${{ matrix.os }} and gdal ${{ matrix.gdal_v }} 
+      runs-on: ${{ matrix.os }} 
       strategy:
         fail-fast: false
         matrix:
