@@ -1,0 +1,45 @@
+on:
+    push:
+      branches: '**'
+    # Allows to trigger the workflow manually
+    workflow_dispatch:
+      branches: master
+    schedule:
+      # * is a special character in YAML so you have to quote this string
+      # Some Examples for cron syntax https://crontab.guru/Examples.html
+      # Schedules job at any point after 12 pm
+      - cron:  '0 0 * * *'
+      # Weekly after sunday
+      # - cron: 0 0 * * 0
+  
+jobs:       
+    TestGeokitDevLocal:
+      name: Test local development Version on ${{ matrix.os }}
+      runs-on: ${{ matrix.os }} and gdal ${{ matrix.gdal_v }}
+      strategy:
+        fail-fast: false
+        matrix:
+          os: ["ubuntu-latest","ubuntu-22.04", "macos-latest","macos-13", "windows-latest","windows-2022"]
+          gdal_v: ["3.4.3","3.5"]
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            repository: julian-belina/geokit_warp_error_mac
+        - uses: conda-incubator/setup-miniconda@v3
+          with:
+            miniforge-version: latest
+            channels: conda-forge
+            activate-environment: geokit_env
+            conda-remove-defaults: true
+        - name: Run tests
+          shell: pwsh
+          run: |
+            ls
+            echo "LS Done"
+            mamba env create --name gdal_test_env gdal_v=${{ matrix.gdal_v }} pytest numpy
+            conda list --name gdal_test_env
+            echo "libaries printed"
+            echo "start pytest"
+            conda run --name gdal_test_env pytest
+            echo "Pytest done"

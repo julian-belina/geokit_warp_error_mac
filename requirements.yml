@@ -1,0 +1,9 @@
+name: gdal_test_env
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python<=3.10.13 
+  - pytest
+  - gdal>=3.4.2,<=3.4.3
+  - numpy
