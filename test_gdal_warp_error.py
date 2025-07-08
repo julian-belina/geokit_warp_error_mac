@@ -10,8 +10,6 @@ def test_warp_bare_bones():
     root_dir = current_dir
     path_to_input_file = str(current_dir.joinpath(r"input_file.tif"))
 
-    output = str(current_dir.joinpath("warp1.tif"))
-
     # Arange inputs
     co = ["COMPRESS=LZW"]
     copyMeta = True
@@ -36,6 +34,8 @@ def test_warp_bare_bones():
         targetAlignedPixels=aligned,
         cutlineDSName=None,
     )
+
+    output = str(current_dir.joinpath("warp1.tif"))
     result = gdal.Warp(output, path_to_input_file, options=opts)
 
     new_raster = gdal.Open(output)
