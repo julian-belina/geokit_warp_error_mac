@@ -1,9 +1,9 @@
 on:
-    push:
-      branches: '**'
-    # Allows to trigger the workflow manually
-    workflow_dispatch:
-      branches: main
+  push:
+    branches: '**'
+  # Allows to trigger the workflow manually
+  workflow_dispatch:
+    branches: main
   
   
 jobs:       
