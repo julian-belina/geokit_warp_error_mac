@@ -31,7 +31,7 @@ jobs:
           run: |
             ls
             echo "LS Done"
-            mamba env create --name gdal_test_env gdal_v=${{ matrix.gdal_v }} pytest numpy
+            mamba env create --name gdal_test_env gdal=${{ matrix.gdal_v }} pytest numpy
             conda list --name gdal_test_env
             echo "libaries printed"
             echo "start pytest"
