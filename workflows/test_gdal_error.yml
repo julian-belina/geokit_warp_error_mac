@@ -3,17 +3,11 @@ on:
       branches: '**'
     # Allows to trigger the workflow manually
     workflow_dispatch:
-      branches: master
-    schedule:
-      # * is a special character in YAML so you have to quote this string
-      # Some Examples for cron syntax https://crontab.guru/Examples.html
-      # Schedules job at any point after 12 pm
-      - cron:  '0 0 * * *'
-      # Weekly after sunday
-      # - cron: 0 0 * * 0
+      branches: Main
+  
   
 jobs:       
-    TestGeokitDevLocal:
+    TestGdalWarp:
       name: Test local development Version on ${{ matrix.os }}
       runs-on: ${{ matrix.os }} and gdal ${{ matrix.gdal_v }}
       strategy:
