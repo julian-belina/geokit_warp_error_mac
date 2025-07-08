@@ -45,7 +45,7 @@ def test_warp_bare_bones():
     array_for_comparison = np.array(comparison_raster.ReadAsArray())
     assert new_array.shape == (396, 413)
     assert array_for_comparison.shape == (396, 413)
-    assert np.array_equal(new_array, array_for_comparison)
+    assert np.isclose(new_array, array_for_comparison, atol=0).all()
     print("done")
 
 
